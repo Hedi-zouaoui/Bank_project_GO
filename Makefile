@@ -1,6 +1,7 @@
 postgres: 
 
-
+createMigrate: 
+	migrate create -ext sql -dir ./db/migration -seq <name of the migrate>
 migratUp: 
    migrate -path ./db/migration -database "postgres://postgres:postgres@localhost:5435/simple_bank?sslmode=disable" up 
 migrateDown : 
