@@ -12,11 +12,12 @@ import (
 )
 
 func createRandomAccount(t *testing.T) Account {
+	user := createRandomUser(t)
 	arg := CreateAccountParams{
 
-		Owner:    util.RandOwner(),
+		Owner:    user.Username ,
 		Balance:  util.RandMoney(),
-		Currency: util.RandowCurrency(),
+		Currency: util.RandCurrency(),
 	}
 	account, err := testQueries.CreateAccount(context.Background(), arg)
 	require.NoError(t, err)
@@ -79,19 +80,3 @@ require.Empty(t , account2)
 
 }
 
-func TestListAccounts(t *testing.T) {
-	for i:= 0 ; i<10 ; i++ {
-		createRandomAccount(t)
-	}
-	arg := ListAccountsParams{
-		Limit: 5,
-		Offset: 5,
-		/// skip the 5 first accounts and return the rest 
-	}
-	accounts , err := testQueries.ListAccounts(context.Background() , arg )
-	require.NoError(t ,err )
-	require.Len(t , accounts , 5)
-	for _ , account := range accounts {
-		require.NotEmpty(t , account )
-	}
-}

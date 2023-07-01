@@ -3,21 +3,19 @@ package db
 import (
 	"database/sql"
 	"log"
-	"testing"
 	"os"
+	"testing"
+
+	util "github.com/Hedi-zouaoui/go_project/utils"
 	_ "github.com/lib/pq"
 ) 
 
-const(
-	dbDriver = "postgres"
-	dbSource = "postgres://postgres:postgres@localhost:5435/simple_bank?sslmode=disable"
- 
-)
 var testQueries *Queries
 var testDB *sql.DB
 func TestMain(m *testing.M){
 	var err error
-	testDB , err = sql.Open(dbDriver, dbSource)
+	config , err := util.LoadConfig("../..")
+	testDB , err = sql.Open(config.DBDriver , config.DBSource)
 	if err!= nil{
 		log.Fatal("cannot connect" , err)
 	}

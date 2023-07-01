@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"strings"
 	"time"
+	"fmt"
 )
 const alpha = "aqwzsxedcrfvtgbyhnujikolpm"
 func init() {
@@ -35,8 +36,14 @@ func RandMoney() int64 {
 	return RandomInt(0 , 1000)
 }
 
-func RandowCurrency() string {
+func RandCurrency() string {
 	currencies := []string{"euro" , "TND" , "usd "}
 	n := len (currencies)
 	return currencies[rand.Intn(n)]
+}
+
+
+// RandomEmail generates a random email
+func RandomEmail() string {
+	return fmt.Sprintf("%s@email.com", RandomString(6))
 }
