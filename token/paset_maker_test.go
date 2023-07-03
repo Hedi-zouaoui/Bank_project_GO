@@ -19,11 +19,12 @@ issuedAt := time.Now()
 expiresIn := issuedAt.Add(duration)
 
 
-	token , err:= maker.CreateToken(username , duration)
+	token ,payload ,  err:= maker.CreateToken(username ,  duration)
 	
  	require.NotEmpty(t , token)
 	require.NoError(t, err)
-	payload , err := maker.VerifyToken(token)
+	require.NotEmpty(t , payload )
+	payload , err = maker.VerifyToken(token)
 
 
 	require.NoError(t , err )

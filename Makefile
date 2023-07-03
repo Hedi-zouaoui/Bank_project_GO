@@ -21,3 +21,12 @@ server :
 
 mock : 
 	mockgen --build_flags=--mod=mod  -destination db/mock/store.go github.com/Hedi-zouaoui/go_project/db/sqlc store
+proto : 
+	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative --go-grpc_out=pb --go-grpc_opt=paths=source_relative --grpc-gateway_out=pb --grpc-gateway_opt=paths=source_relative proto/*.proto 
+
+evans : 
+	evans -r -p 9091 
+
+
+
+	
